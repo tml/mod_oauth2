@@ -94,7 +94,7 @@ static int oauth2_request_handler(oauth2_cfg_source_token_t *cfg,
 	json_t *json_token = NULL;
 	char *source_token = NULL;
 
-	oauth2_debug(ctx->log, "enter");
+	oauth2_debug(ctx->log, "enter oauth2_request_handler");
 
 	oauth2_apache_scrub_headers(ctx, target_pass);
 
@@ -140,7 +140,7 @@ end:
 	if (json_token)
 		json_decref(json_token);
 
-	oauth2_debug(ctx->log, "leave");
+	oauth2_debug(ctx->log, "leave oauth2_request_handler");
 
 	return rv;
 }
@@ -207,7 +207,7 @@ oauth2_authz_checker(request_rec *r, const char *require_args,
 	cfg = ap_get_module_config(r->per_dir_config, &oauth2_module);
 	ctx = OAUTH2_APACHE_REQUEST_CTX(r, oauth2);
 
-	oauth2_debug(ctx->log, "enter");
+	oauth2_debug(ctx->log, "enter authz_status");
 
 	if (r->user != NULL && strlen(r->user) == 0)
 		r->user = NULL;
@@ -239,7 +239,7 @@ oauth2_authz_checker(request_rec *r, const char *require_args,
 			      value);
 	}
 
-	oauth2_debug(ctx->log, "leave");
+	oauth2_debug(ctx->log, "leave authz_status");
 
 	return rc;
 }
